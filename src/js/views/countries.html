@@ -1,0 +1,52 @@
+<div class="oj-hybrid-padding">
+    <h1>Countries</h1>
+    <div class="oj-flex oj-sm-align-items-center">
+        <p class="oj-flex-item">Edit Countries</p>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-sm-12 oj-md-6 oj-flex-item">
+            <div class="oj-panel">
+                <div class="oj-form-layout">
+                    <div class="oj-form">
+                        <div class="oj-form-gontrol-group">
+                            <oj-label for="countryId">Country Id</oj-label>
+                            <oj-input-text id="countryId" value="{{countryId}}"></oj-input-text>
+                            <oj-label for="countryName">Country Name</oj-label>
+                            <oj-input-text id="countryName" value="{{countryName}}"></oj-input-text>
+                        </div>
+                        <oj-button on-click="[[addCountry]]">Add</oj-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="oj-sm-12 oj-md-6 oj-flex-item">
+            <div class="oj-panel">
+                <h3>Countries</h3>
+                <oj-table id="countries-table" aria-label="Countries Table"
+                    data='[[countriesDataProvider]]'
+                    columns-default='{"sortable": "disabled"}'
+                    columns='[
+                        {"headerText": "Country Id", "field": "countryId"},
+                        {"headerText": "Country Name", "field": "countryName"},
+                        {"headerText": "Action", "field": ""}
+                    ]'
+                    on-current-row-changed='[[rowChangeListener]]'
+                    row-renderer="[[oj.KnockoutTemplateUtils.getRenderer('rowTemplate', true)]]">
+                </oj-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="rowTemplate">
+    <tr>
+        <td data-bind="text: countryId">
+        </td>
+        <td data-bind="text: countryName">
+        </td>
+        <td>
+            <a href="#" data-bind="click: $parent.removeCountry">X</a>
+        </td>
+    </tr>
+<script>
